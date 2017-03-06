@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
+using MyFirstWebService.Models;
+using MyFirstWebService.Data;
 
 namespace MyFirstWebService
 {
@@ -17,6 +19,7 @@ namespace MyFirstWebService
     public class TheWebService : System.Web.Services.WebService
     {
 
+
         [WebMethod]
         public string HelloWorld()
         {
@@ -24,29 +27,15 @@ namespace MyFirstWebService
         }
 
         [WebMethod]
-        public int Add(int a, int b)
+        public List<Game> CurrentGames()
         {
-            return (a + b);
+            List<Game> gameList = new List<Game>();
+
+            GameRepository repo = new GameRepository();
+
+
         }
 
-        [WebMethod]
-        public System.Single Subtract(System.Single A, System.Single B)
-        {
-            return (A - B);
-        }
 
-        [WebMethod]
-        public System.Single Multiply(System.Single A, System.Single B)
-        {
-            return A * B;
-        }
-
-        [WebMethod]
-        public System.Single Divide(System.Single A, System.Single B)
-        {
-            if (B == 0)
-                return -1;
-            return Convert.ToSingle(A / B);
-        }
     }
 }

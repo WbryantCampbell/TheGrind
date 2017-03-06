@@ -121,6 +121,16 @@
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MyFirstWebService.Data\MyFirstWebService.Data.csproj">
+      <Project>{270cfd06-121c-4398-8f16-54548bf08deb}</Project>
+      <Name>MyFirstWebService.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyFirstWebService.Models\MyFirstWebService.Models.csproj">
+      <Project>{ea99c837-a16b-4bb9-b60f-980cb689262f}</Project>
+      <Name>MyFirstWebService.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
