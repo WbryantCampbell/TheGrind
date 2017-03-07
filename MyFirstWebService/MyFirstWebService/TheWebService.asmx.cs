@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Services;
 using MyFirstWebService.Models;
 using MyFirstWebService.Data;
+using System.Configuration;
 
 namespace MyFirstWebService
 {
@@ -18,6 +19,18 @@ namespace MyFirstWebService
     // [System.Web.Script.Services.ScriptService]
     public class TheWebService : System.Web.Services.WebService
     {
+        private string _connectionString;
+
+        public TheWebService()
+        {
+            string connectionString;
+            connectionString = ConfigurationManager
+                                    .ConnectionStrings["RegConnectionString"]
+                                    .ConnectionString;
+
+            _connectionString = connectionString;
+
+        }
 
 
         [WebMethod]
@@ -29,12 +42,12 @@ namespace MyFirstWebService
         [WebMethod]
         public List<Game> CurrentGames()
         {
-            List<Game> gameList = new List<Game>();
-
-            GameRepository repo = new GameRepository();
+            GameRepository repo = new GameRepository(_connectionString);
 
 
+            return repo.GetAll();
         }
+
 
 
     }

@@ -62,6 +62,10 @@
     <None Include="Service References\MyFirstWebServiceReference\TheWebService.wsdl" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MyFirstWebService.Models\MyFirstWebService.Models.csproj">
+      <Project>{ea99c837-a16b-4bb9-b60f-980cb689262f}</Project>
+      <Name>MyFirstWebService.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MyFirstWebService\MyFirstWebService.csproj">
       <Project>{7a734269-6329-48e2-8f2f-36e5350e01c5}</Project>
       <Name>MyFirstWebService</Name>
