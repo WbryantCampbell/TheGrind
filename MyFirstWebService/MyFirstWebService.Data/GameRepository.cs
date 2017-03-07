@@ -39,6 +39,24 @@ namespace MyFirstWebService.Data
             }
             sqlConn.Close();
             return result;
+        }
+
+        public void Create(Game model)
+        {
+            SqlConnection sqlConn = new SqlConnection(_connectionString);
+
+            Game result = new Game();
+            SqlCommand sqlComm = new SqlCommand($"INSERT INTO GameInfo (Title,Release,ESRB,Studio,Rating) VALUES (@Title,@Release,@ESRB,@Studio,@Rating)", sqlConn);
+
+            sqlComm.Parameters.AddWithValue("@Title",model.Title);
+            sqlComm.Parameters.AddWithValue("@Release", model.Release);
+            sqlComm.Parameters.AddWithValue("@ESRB", model.ESRB);
+            sqlComm.Parameters.AddWithValue("@Studio", model.Studio);
+            sqlComm.Parameters.AddWithValue("@Rating", model.Rating);
+
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
 
         }
     }

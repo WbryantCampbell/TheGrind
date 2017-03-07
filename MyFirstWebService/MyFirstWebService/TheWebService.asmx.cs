@@ -48,6 +48,14 @@ namespace MyFirstWebService
             return repo.GetAll();
         }
 
+        [WebMethod]
+        public void addGame(Game model)
+        {
+            GameRepository repo = new GameRepository(_connectionString);
+
+            repo.Create(model);
+        }
+
 
 
     }
