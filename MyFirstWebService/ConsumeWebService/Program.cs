@@ -5,6 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using MyFirstWebService;
 using MyFirstWebService.Models;
+using MyFirstWebService.StockReference;
+using System.IO;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace ConsumeWebService
 {
@@ -33,13 +37,13 @@ namespace ConsumeWebService
                 Console.WriteLine("***************");
             }
 
-            //Console.WriteLine("Would you like to check your stocks? Y/N?");
-            //string rv = Console.ReadLine();
+            Console.WriteLine("Would you like to check your stocks? Y/N?");
+            string rv = Console.ReadLine();
 
-            //if (rv == "Y")
-            //{
-            //    checkStocks();
-            //}
+            if (rv == "Y")
+            {
+                checkStocks();
+            }
 
             Console.WriteLine("Let's add a game");
             Game newGame = new Game();
@@ -69,9 +73,25 @@ namespace ConsumeWebService
             Console.ReadLine();
         }
 
+        public static string saveXML(string xmlString)
+        {
+            string FILENAME = @"C:\_repos\TheGrind\MyFirstWebService\MyFirstWebService.Data\StockXML\";
+            string FILEEXT = ".xml";
+
+            var filename = FILENAME + DateTime.Today.ToString("yyyy-MM-dd") + FILEEXT;
+
+            using (StreamWriter sw = File.CreateText(filename))
+            {
+                sw.WriteLine(xmlString);
+                sw.Close();  
+            }
+
+            return filename;
+        }
+
         public static void checkStocks()
         {
-            MyFirstWebService.StockReference.StockQuoteSoapClient soap = new MyFirstWebService.StockReference.StockQuoteSoapClient();
+            StockQuoteSoapClient soap = new StockQuoteSoapClient();
 
             Console.WriteLine("Enter the name of the stock symbol...");
 
@@ -79,7 +99,18 @@ namespace ConsumeWebService
 
             string quote = soap.GetQuote(symbol);
 
-            Console.WriteLine(quote);
+            //Console.WriteLine(quote);
+
+            saveXML(quote);
         }
+
+        public void deserialize(string path)
+        {
+            XmlSerializer xml = new XmlSerializer(typeof(Stock));
+            StreamReader sr = new StreamReader(path);
+            Stock newStock = (Stock)xml.Deserialize(sr);
+        }
+
+       
     }
 }
