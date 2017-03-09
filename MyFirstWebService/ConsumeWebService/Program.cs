@@ -108,20 +108,34 @@ namespace ConsumeWebService
 
         public static void deserialize(string path)
         {
-            XmlSerializer xml = new XmlSerializer(typeof(Stock.StockQuotes));
-            StreamReader sr = new StreamReader(path);
-            Stock.StockQuotesStock newStock = (Stock.StockQuotesStock)xml.Deserialize(sr);
+            try
+            {
+                Stock newStock = new Stock();
+                XmlSerializer xml = new XmlSerializer(typeof(Stock));
+                //StreamReader sr = new StreamReader(path);
+                //Stock newStock = (Stock)xml.Deserialize(sr);
+                using (TextReader tr = new StreamReader(path))
+                {
+                    newStock = xml.Deserialize(tr) as Stock;
+                }
 
-            Console.WriteLine($"Company Stock Information");
-            Console.WriteLine($"_____________________________");
-            Console.WriteLine($"Company Name: {newStock.Name}");
-            Console.WriteLine($"Company Symbol: {newStock.Symbol}");
-            Console.WriteLine($"Last Market Value: {newStock.Last}");
-            Console.WriteLine($"Percentage of Change: {newStock.PercentageChange}");
-            Console.WriteLine($"Company's Annual Range: {newStock.AnnRange}");
-            Console.WriteLine($"_____________________________");
+                Console.WriteLine($"Company Stock Informastion");
+                Console.WriteLine($"_____________________________");
+                Console.WriteLine($"Company Name: {newStock.Name}");
+                Console.WriteLine($"Company Symbol: {newStock.Symbol}");
+                Console.WriteLine($"Last Market Value: {newStock.Last}");
+                Console.WriteLine($"Percentage of Change: {newStock.PercentageChange}");
+                Console.WriteLine($"Company's Annual Range: {newStock.AnnRange}");
+                Console.WriteLine($"_____________________________");
 
-            Console.ReadLine();
+                Console.ReadLine();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+
+            }
+
 
         }
 
