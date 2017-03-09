@@ -86,6 +86,8 @@ namespace ConsumeWebService
                 sw.Close();  
             }
 
+            deserialize(filename);
+
             return filename;
         }
 
@@ -104,11 +106,23 @@ namespace ConsumeWebService
             saveXML(quote);
         }
 
-        public void deserialize(string path)
+        public static void deserialize(string path)
         {
-            XmlSerializer xml = new XmlSerializer(typeof(Stock));
+            XmlSerializer xml = new XmlSerializer(typeof(Stock.StockQuotes));
             StreamReader sr = new StreamReader(path);
-            Stock newStock = (Stock)xml.Deserialize(sr);
+            Stock.StockQuotesStock newStock = (Stock.StockQuotesStock)xml.Deserialize(sr);
+
+            Console.WriteLine($"Company Stock Information");
+            Console.WriteLine($"_____________________________");
+            Console.WriteLine($"Company Name: {newStock.Name}");
+            Console.WriteLine($"Company Symbol: {newStock.Symbol}");
+            Console.WriteLine($"Last Market Value: {newStock.Last}");
+            Console.WriteLine($"Percentage of Change: {newStock.PercentageChange}");
+            Console.WriteLine($"Company's Annual Range: {newStock.AnnRange}");
+            Console.WriteLine($"_____________________________");
+
+            Console.ReadLine();
+
         }
 
        

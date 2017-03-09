@@ -15,7 +15,7 @@ namespace MyFirstWebService.Models
         [System.SerializableAttribute()]
         [System.ComponentModel.DesignerCategoryAttribute("code")]
         [XmlType(AnonymousType = true)]
-        [XmlRoot(Namespace = "", IsNullable = false)]
+        [XmlRoot(Namespace = "StockQuotes", IsNullable = false)]
         public partial class StockQuotes
         {
 
